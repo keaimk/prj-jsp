@@ -15,9 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/board")
 public class BoardController {
-
     private final BoardService service;
-
 
     // 게시물 CRUD
 
@@ -32,7 +30,7 @@ public class BoardController {
     public String newBoard(Board board) {
         service.add(board);
 
-        return "redirect:/board/new";
+        return "redirect:/board/list";
     }
 
     @GetMapping("list")
@@ -40,5 +38,18 @@ public class BoardController {
         List<Board> list = service.list();
         model.addAttribute("boardList", list);
 
+    }
+
+    @GetMapping("view")
+    public void viewBoard(Integer id, Model model) {
+        Board board = service.get(id);
+        model.addAttribute("board", board);
+    }
+
+    @PostMapping("delete")
+    public String deleteBoard(Integer id) {
+        service.remove(id);
+        
+        return "redirect:/board/list";
     }
 }
