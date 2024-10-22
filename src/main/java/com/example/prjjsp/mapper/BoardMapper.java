@@ -8,12 +8,12 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
 
-
     @Insert("""
             INSERT INTO board
             (title, content, writer)
             VALUES (#{title}, #{content}, #{writer})
             """)
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(Board board);
 
     @Select("""
