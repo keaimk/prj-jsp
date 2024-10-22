@@ -17,7 +17,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/board")
 public class BoardController {
+
     private final BoardService service;
+
 
     // 게시물 CRUD
 
@@ -53,9 +55,12 @@ public class BoardController {
     }
 
     @PostMapping("delete")
-    public String deleteBoard(Integer id) {
+    public String deleteBoard(Integer id, RedirectAttributes rttr) {
         service.remove(id);
 
+        rttr.addFlashAttribute("message",
+                Map.of("type", "warning",
+                        "text", id + "번 게시물이 삭제되었습니다."));
         return "redirect:/board/list";
     }
 
@@ -69,7 +74,9 @@ public class BoardController {
     public String editBoard(Board board, RedirectAttributes rttr) {
 
         service.update(board);
-
+        rttr.addFlashAttribute("message",
+                Map.of("type", "warning",
+                        "text", board.getId() + "번 게시물이 수정되었습니다."));
         rttr.addAttribute("id", board.getId());
         return "redirect:/board/view";
     }
