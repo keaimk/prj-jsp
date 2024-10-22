@@ -7,7 +7,6 @@
 <body>
 <c:import url="/WEB-INF/fragment/navbar.jsp"/>
 <h2>${board.id}번 게시물</h2>
-
 <div>
     제목
     <input type="text" value="${board.title}" readonly>
@@ -30,5 +29,6 @@
         <button>삭제</button>
     </form>
 </div>
+<a href="/board/edit?id=${board.id}">수정</a>
 </body>
 </html>
