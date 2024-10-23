@@ -34,8 +34,20 @@ public class BoardService {
         // 페이지 관련 정보들
         Integer countAll = mapper.countAll();
         Integer lastPageNumber = (countAll - 1) / 10 + 1; // 마지막 페이지 번호
+        Integer rightPageNumber = ((page - 1) / 10 + 1) * 10; // 현재 페이지 기준 오른쪽 끝 페이지 번호
+        Integer leftPageNumber = rightPageNumber - 9; // 현재 페이지 기준 왼쪽 끝 페이지 번호
 
-        map.put("lastPageNumber", lastPageNumber);
+        // 오른쪽 끝페이지는 마지막 페이지 보다 클 수 없음
+        rightPageNumber = Math.min(rightPageNumber, lastPageNumber);
+
+        Map<String, Object> pageInfo = new HashMap<>();
+
+        pageInfo.put("leftPageNumber", leftPageNumber);
+        pageInfo.put("rightPageNumber", rightPageNumber);
+        pageInfo.put("lastPageNumber", lastPageNumber);
+        pageInfo.put("currentPageNumber", page);
+
+        map.put("pageInfo", pageInfo);
         map.put("boardList", list);
 
         return map;
