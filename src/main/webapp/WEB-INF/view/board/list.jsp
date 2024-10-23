@@ -35,7 +35,7 @@
 </table>
 <div>
     <%--    pagination --%>
-    <c:forEach begin="1" end="${lastPageNumber}" var="pageNumber">
+    <c:forEach begin="${pageInfo.leftPageNumber}" end="${pageInfo.rightPageNumber}" var="pageNumber">
         <a href="/board/list?page=${pageNumber}">${pageNumber}</a>
     </c:forEach>
 </div>
