@@ -12,9 +12,9 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 <body>
-
-<c:import url="/WEB-INF/fragment/navbar.jsp"/>
-
+<c:import url="/WEB-INF/fragment/navbar.jsp">
+    <c:param name="active" value="list"/>
+</c:import>
 <h2>게시물 목록</h2>
 <table>
     <thead>
