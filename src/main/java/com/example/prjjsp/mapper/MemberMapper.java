@@ -3,6 +3,9 @@ package com.example.prjjsp.mapper;
 import com.example.prjjsp.dto.Member;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface MemberMapper {
@@ -13,4 +16,11 @@ public interface MemberMapper {
             VALUES (#{id}, #{password}, #{nickName}, #{description})
             """)
     int insert(Member member);
+
+    @Select("""
+            SELECT *
+            FROM member
+            ORDER BY id 
+            """)
+    List<Member> selectAll();
 }
