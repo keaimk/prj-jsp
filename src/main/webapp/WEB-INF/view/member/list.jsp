@@ -28,7 +28,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${memeberList}" var="member">
+                <c:forEach items="${memberList}" var="member">
                     <tr>
                         <td>
                             <a href="/member/view?id${member.id}">
