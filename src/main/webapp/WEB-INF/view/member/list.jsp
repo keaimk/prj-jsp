@@ -18,7 +18,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12 col-md-9 col-lg-6">
-            <h2 class="my-3">회원 목록</h2>
+            <h2 class="my-3">
+                회원 목록
+            </h2>
             <table class="table">
                 <thead>
                 <tr>
@@ -31,7 +33,9 @@
                 <c:forEach items="${memberList}" var="member">
                     <tr>
                         <td>
-                            <a href="/member/view?id${member.id}">
+                            <a href="/member/view?id=${member.id}">
+                                    ${member.id}
+                            </a>
                         </td>
                         <td>${member.nickName}</td>
                         <td>${member.inserted}</td>
@@ -39,14 +43,15 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-                    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-                    crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-                    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-                    crossorigin="anonymous"></script>
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
 </body>
 </html>
