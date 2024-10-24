@@ -30,7 +30,7 @@
                         <i class="fa-regular fa-user"></i>
                     </th>
                     <th class="d-none d-lg-table-cell">
-                        <i class="fa-regular fa-calendar"></i>
+                        <i class="fa-regular fa-calendar-days"></i>
                     </th>
                 </tr>
                 </thead>
