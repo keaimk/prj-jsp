@@ -30,8 +30,8 @@ public interface MemberMapper {
 
     @Delete("""
             DELETE FROM member
-            WHERE id = #{id}
-            AND password = #{password}
+            WHERE id = #{id} 
+              AND password = #{password}
             """)
     int deleteByIdAndPassword(String id, String password);
 
@@ -55,7 +55,7 @@ public interface MemberMapper {
             SELECT *
             FROM member
             WHERE id = #{id}
-            AND password = #{password}
+              AND password = #{password}
             """)
-    Member selectByIdPassword(String id, String password);
+    Member selectByIdAndPassword(String id, String password);
 }
