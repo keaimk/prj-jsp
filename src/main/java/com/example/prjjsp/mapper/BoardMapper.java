@@ -9,7 +9,6 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
 
-
     @Insert("""
             INSERT INTO board
             (title, content, writer)
@@ -40,8 +39,7 @@ public interface BoardMapper {
     @Update("""
             UPDATE board
             SET title=#{title},
-                content=#{content}, 
-                writer=#{writer}
+                content=#{content}
             WHERE   
                 id = #{id}
             """)
