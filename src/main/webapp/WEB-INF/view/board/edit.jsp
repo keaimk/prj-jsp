@@ -33,12 +33,6 @@
                               rows="10">${board.content}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="inputWriter1" class="form-label">
-                        작성자
-                    </label>
-                    <input id="inputWriter1" class="form-control" type="text" name="writer" value="${board.writer}">
-                </div>
-                <div class="mb-3">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#updateConfirmModal1">
                         <i class="fa-regular fa-floppy-disk"></i>
@@ -46,7 +40,6 @@
                     </button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
