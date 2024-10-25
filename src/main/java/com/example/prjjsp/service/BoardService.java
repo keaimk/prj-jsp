@@ -73,7 +73,6 @@ public class BoardService {
         } else {
             throw new RuntimeException("삭제 권한이 없습니다.");
         }
-
     }
 
     public void update(Board board, Member member) {
