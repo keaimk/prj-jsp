@@ -61,6 +61,10 @@
                             </a>
                         </li>
                     </c:if>
+                    <%-- TODO: 지우거나 업데이트할 것 --%>
+                    <li>
+                        로그인: ${sessionScope.loggedInMember.id}
+                    </li>
                 </ul>
             </div>
         </div>
