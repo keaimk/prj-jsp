@@ -9,9 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
+@Transactional
 public class MemberService {
+
     private final MemberMapper mapper;
 
     public void addMember(Member member) {
@@ -41,7 +42,7 @@ public class MemberService {
     }
 
     public Member get(String id, String password) {
-        return mapper.selectByIdPassword(id, password);
+        return mapper.selectByIdAndPassword(id, password);
     }
 
     public boolean hasAccess(String id, Member member) {
