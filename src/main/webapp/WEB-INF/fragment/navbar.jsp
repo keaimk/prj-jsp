@@ -53,6 +53,16 @@
                             </a>
                         </li>
                     </c:if>
+
+                    <c:if test="${not loggedIn}">
+                        <li class="nav-item">
+                            <a href="/member/view?id=${sessionScope.loggedInMember.id}" class="nav-link">
+                                <i class="fa-solid fa-circle-info"></i>
+                                내 정보
+                            </a>
+                        </li>
+                    </c:if>
+
                     <c:if test="${loggedIn}">
                         <li class="nav-item">
                             <a href="/member/logout" class="nav-link">
@@ -61,10 +71,6 @@
                             </a>
                         </li>
                     </c:if>
-                    <%-- TODO: 지우거나 업데이트할 것 --%>
-                    <li>
-                        로그인: ${sessionScope.loggedInMember.id}
-                    </li>
                 </ul>
             </div>
         </div>
