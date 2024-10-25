@@ -48,11 +48,12 @@ public class BoardController {
         return "redirect:/board/view";
     }
 
-    //    /board/list
-//    /board/list?page=1
+    // /board/list
+    // /board/list?page=1
     @GetMapping("list")
-    public void listBoard(@RequestParam(name = "page", defaultValue = "1") Integer page, Model model) {
-//        한 페이지에 10개의 게시물
+    public void listBoard(@RequestParam(name = "page", defaultValue = "1") Integer page,
+                          Model model) {
+        // 한 페이지에 10개의 게시물
 
         Map<String, Object> result = service.list(page);
         model.addAllAttributes(result);
@@ -65,7 +66,8 @@ public class BoardController {
     }
 
     @PostMapping("delete")
-    public String deleteBoard(Integer id, RedirectAttributes rttr,
+    public String deleteBoard(Integer id,
+                              RedirectAttributes rttr,
                               @SessionAttribute("loggedInMember") Member member) {
         try {
             service.remove(id, member);
@@ -74,27 +76,46 @@ public class BoardController {
                     Map.of("type", "warning",
                             "text", id + "번 게시물이 삭제되었습니다."));
             return "redirect:/board/list";
+
         } catch (RuntimeException e) {
             rttr.addFlashAttribute("message",
-                    Map.of("type", "warning",
-                            "text", id + "번 게시물이 삭제중 문제가 발생하였습니다."));
+                    Map.of("type", "danger",
+                            "text", id + "번 게시물 삭제중 문제가 발생하였습니다."));
+            rttr.addAttribute("id", id);
             return "redirect:/board/view";
         }
     }
 
     @GetMapping("edit")
-    public void editBoard(Integer id, Model model) {
+    public String editBoard(Integer id, Model model, RedirectAttributes rttr,
+                            @SessionAttribute("loggedInMember") Member member) {
         Board board = service.get(id);
-        model.addAttribute("board", board);
+        if (board.getWriter().equals(member.getId())) {
+            model.addAttribute("board", board);
+            return null;
+        } else {
+            rttr.addFlashAttribute("message", Map.of("type",
+                    "danger", "text", "게시물 수정권한이 없습니다."));
+            return "redirect:/member/login";
+        }
     }
 
     @PostMapping("edit")
-    public String editBoard(Board board, RedirectAttributes rttr) {
+    public String editBoard(Board board,
+                            RedirectAttributes rttr,
+                            @SessionAttribute("loggedInMember") Member member) {
+        try {
+            service.update(board, member);
 
-        service.update(board);
-        rttr.addFlashAttribute("message",
-                Map.of("type", "warning",
-                        "text", board.getId() + "번 게시물이 수정되었습니다."));
+            rttr.addFlashAttribute("message",
+                    Map.of("type", "success",
+                            "text", board.getId() + "번 게시물이 수정되었습니다."));
+        } catch (RuntimeException e) {
+            //
+            rttr.addFlashAttribute("message",
+                    Map.of("type", "danger",
+                            "text", board.getId() + "번 게시물 수정중 문제가 발생되었습니다."));
+        }
         rttr.addAttribute("id", board.getId());
         return "redirect:/board/view";
     }

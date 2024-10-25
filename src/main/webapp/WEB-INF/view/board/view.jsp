@@ -16,13 +16,10 @@
 
 <%-- 수정/삭제 권한 --%>
 <c:set value="${sessionScope.loggedInMember.id == board.writer}" var="hasAccess"/>
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12 col-md-9 col-lg-6">
-
             <h2 class="my-3">${board.id}번 게시물</h2>
-
             <div class="mb-3">
                 <label for="" class="form-label">
                     제목
@@ -47,24 +44,21 @@
                 </label>
                 <input class="form-control" type="datetime-local" value="${board.inserted}" readonly>
             </div>
-
             <c:if test="${hasAccess}">
                 <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal1">
                     <i class="fa-solid fa-trash-can"></i>
                     삭제
                 </button>
+                <a class="btn btn-outline-primary" href="/board/edit?id=${board.id}">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    수정
+                </a>
             </c:if>
-            <a class="btn btn-outline-primary" href="/board/edit?id=${board.id}">
-                <i class="fa-solid fa-pen-to-square"></i>
-                수정
-            </a>
-
             <c:if test="${hasAccess}">
                 <form id="deleteForm1" class="d-none" action="/board/delete" method="post">
                     <input type="hidden" name="id" value="${board.id}">
                 </form>
             </c:if>
-
         </div>
     </div>
 </div>
