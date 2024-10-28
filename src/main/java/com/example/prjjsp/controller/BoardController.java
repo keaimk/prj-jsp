@@ -52,11 +52,14 @@ public class BoardController {
     // /board/list?page=1
     @GetMapping("list")
     public void listBoard(@RequestParam(name = "page", defaultValue = "1") Integer page,
+                          @RequestParam(required = false) String searchTarget,
+                          @RequestParam(defaultValue = "") String keyword,
                           Model model) {
         // 한 페이지에 10개의 게시물
 
-        Map<String, Object> result = service.list(page);
+        Map<String, Object> result = service.list(page, searchTarget, keyword);
         model.addAllAttributes(result);
+
     }
 
     @GetMapping("view")
@@ -87,15 +90,20 @@ public class BoardController {
     }
 
     @GetMapping("edit")
-    public String editBoard(Integer id, Model model, RedirectAttributes rttr,
+    public String editBoard(Integer id,
+                            Model model,
+                            RedirectAttributes rttr,
                             @SessionAttribute("loggedInMember") Member member) {
+
         Board board = service.get(id);
         if (board.getWriter().equals(member.getId())) {
             model.addAttribute("board", board);
             return null;
         } else {
-            rttr.addFlashAttribute("message", Map.of("type",
-                    "danger", "text", "게시물 수정권한이 없습니다."));
+            rttr.addFlashAttribute("message",
+                    Map.of("type", "danger",
+                            "text", "게시물 수정권한이 없습니다."));
+
             return "redirect:/member/login";
         }
     }
@@ -104,6 +112,7 @@ public class BoardController {
     public String editBoard(Board board,
                             RedirectAttributes rttr,
                             @SessionAttribute("loggedInMember") Member member) {
+
         try {
             service.update(board, member);
 

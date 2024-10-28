@@ -15,19 +15,20 @@ import java.util.Map;
 @Transactional
 @RequiredArgsConstructor
 public class BoardService {
+
     private final BoardMapper mapper;
 
     public void add(Board board, Member member) {
         mapper.insert(board, member);
     }
 
-    public Map<String, Object> list(Integer page) {
+    public Map<String, Object> list(Integer page, String searchTarget, String keyword) {
         // 한 페이지에 10개
 
         Integer offset = (page - 1) * 10;
 
 //        List<Board> list = mapper.selectAll();
-        List<Board> list = mapper.selectAllPaging(offset);
+        List<Board> list = mapper.selectAllPaging(offset, searchTarget, keyword);
 
         // Controller에게 넘겨 줄 정보들을 담을 map
         Map<String, Object> map = new HashMap<>();
@@ -59,6 +60,7 @@ public class BoardService {
 
         map.put("pageInfo", pageInfo);
         map.put("boardList", list);
+
         return map;
     }
 
@@ -73,6 +75,7 @@ public class BoardService {
         } else {
             throw new RuntimeException("삭제 권한이 없습니다.");
         }
+
     }
 
     public void update(Board board, Member member) {
