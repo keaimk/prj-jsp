@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface BoardMapper {
-    
+
     @Insert("""
             INSERT INTO board
             (title, content, writer)
@@ -95,4 +95,10 @@ public interface BoardMapper {
             </script>
             """)
     Integer countAll(String searchTarget, String keyword);
+
+    @Delete("""
+            DELETE FROM board
+            WHERE writer = #{memberId}
+            """)
+    int deleteByMemberId(String memberId);
 }
