@@ -91,8 +91,13 @@
         <c:forEach begin="${pageInfo.leftPageNumber}"
                    end="${pageInfo.rightPageNumber}"
                    var="pageNumber">
+            <c:url value="" var="pageLink">
+                <c:param name="page" value="${pageNumber}"></c:param>
+                <c:param name="searchTaret" value="${param.searchTarget}"/>
+                <c:param name="keyword" value="${param.keyword}"/>
+            </c:url>
             <li class="page-item ${pageInfo.currentPageNumber == pageNumber ? 'active' : ''}">
-                <a href="/board/list?page=${pageNumber}" class="page-link">${pageNumber}</a>
+                <a href="${pageLink}" class="page-link">${pageNumber}</a>
             </li>
         </c:forEach>
         <c:if test="${pageInfo.hasNextPage}">
