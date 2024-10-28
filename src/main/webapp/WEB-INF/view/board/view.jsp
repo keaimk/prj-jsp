@@ -16,10 +16,13 @@
 
 <%-- 수정/삭제 권한 --%>
 <c:set value="${sessionScope.loggedInMember.id == board.writer}" var="hasAccess"/>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12 col-md-9 col-lg-6">
+
             <h2 class="my-3">${board.id}번 게시물</h2>
+
             <div class="mb-3">
                 <label for="" class="form-label">
                     제목
@@ -36,7 +39,7 @@
                 <label for="" class="form-label">
                     작성자
                 </label>
-                <input class="form-control" type="text" value="${board.writer}" readonly>
+                <input class="form-control" type="text" value="${board.writerNickName}" readonly>
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">
@@ -44,6 +47,7 @@
                 </label>
                 <input class="form-control" type="datetime-local" value="${board.inserted}" readonly>
             </div>
+
             <c:if test="${hasAccess}">
                 <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal1">
                     <i class="fa-solid fa-trash-can"></i>
